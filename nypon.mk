@@ -40,8 +40,8 @@ PRODUCT_COPY_FILES += \
 # currently contain all of the bitmaps at xhdpi density so
 # we do this little trick to fall back to the hdpi version
 # if the xhdpi doesn't exist.
-PRODUCT_AAPT_CONFIG := normal mdpi hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
+PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
 # Configuration scripts
 PRODUCT_COPY_FILES += \
@@ -85,10 +85,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
    $(LOCAL_PATH)/config/cn_server:system/bin/cn_server
 
-# Barometar permissions
-PRODUCT_COPY_FILES += \
-   frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
-
 # Android kind of memory
 PRODUCT_PROPERTY_OVERRIDES += ro.build.characteristics=nosdcard
 
@@ -102,9 +98,6 @@ PRODUCT_PACKAGES += \
     Nfc \
     Tag \
     com.android.nfc_extras
-
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
@@ -129,7 +122,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
   ro.hwui.texture_cache_size=11 \
   ro.hwui.layer_cache_size=9 \
   ro.hwui.path_cache_size=3 \
-  ro.sf.lcd_density=240
+  ro.sf.lcd_density=240 \
+  ro.sf.display_rotation=0
 
 # Hardware video codecs configurations
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -147,16 +141,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
-  ro.nfc.on.default=false \
-  ro.nfc.se.sim.enable=true \
-  ro.nfc.se.smx.enable=false \
-  ro.nfc.icon.enable=true \
   ro.nfc.vendor.name=nxp
-
-# System props for SOLS
-PRODUCT_PROPERTY_OVERRIDES += \
-  ro.semc.sols.product-code=105 \
-  ro.semc.sols.company-code=5
 
 #Kernel modules
 PRODUCT_COPY_FILES += \
